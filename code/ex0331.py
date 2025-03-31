@@ -3,6 +3,9 @@ from datetime import datetime
 # Optional은 None의 가능성이 있을 때 이용함
 from typing import Optional
 
+# 클래스 이용
+from PageClass import Page
+
 # 04-data-structures
 def ex01():
     # 순서가 없으므로 인덱스를 이용해 참조할 수 없음
@@ -86,5 +89,10 @@ if __name__ == "__main__":
     # ex01()
     # ex02()
     # print_page("hello")
-    anno = increment.__annotations__  # 타입 정보가 저장되어 있음
-    print(anno)
+    # anno = increment.__annotations__  # 타입 정보가 저장되어 있음
+    # print(anno)
+
+    pageClassObj = Page(1, "hello world.")
+    num = pageClassObj.num
+    content = pageClassObj.content
+    print(f'pageNum: {num}, content: {content}')
