@@ -90,13 +90,39 @@ class Klass:
     @classmethod
     def 필드조회_카운트(cls):
         cls.xx += 1
+        
+# 함수 데커레이터 이용
+# @decorator
+# def f():
+    # pass
+
+# decorator(f)의 반환값이 f라는 이름에 묶임
+# f = decorator(f)
+
+
+# 데커레이트할 함수를 받음
+def deco1(f):
+    print('데코레이터 호출')
+    def wrapper():
+        print('꾸밈 받기 전')
+        v = f()  # 원래 함수를 실행
+        print('꾸밈 받기 후')
+        return v
+    return wrapper
+
+@deco1
+def 그냥함수():
+    print("exec")
+    return
 
 if __name__ == "__main__":
     # m = Mutable({'a': 1, 'b': 2})
     # print(m.b)
-    k =  Klass()
-    c = Klass.필드조회_카운트()
-    print(Klass.xx)
-    c = Klass.필드조회_카운트()
-    print(Klass.xx)
+    
+    # k =  Klass()
+    # c = Klass.필드조회_카운트()
+    # print(Klass.xx)
+    # c = Klass.필드조회_카운트()
+    # print(Klass.xx)
+    그냥함수()
     pass
