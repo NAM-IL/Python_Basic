@@ -81,7 +81,22 @@ nums = [1, 2, 3, 4, 5]
 result = reduce(lambda a, b : a + b, nums)
 print(result)
 
+
+class Klass:
+    xx = 0
+
+    def asdf(self):
+        pass
+    @classmethod
+    def 필드조회_카운트(cls):
+        cls.xx += 1
+
 if __name__ == "__main__":
     # m = Mutable({'a': 1, 'b': 2})
     # print(m.b)
+    k =  Klass()
+    c = Klass.필드조회_카운트()
+    print(Klass.xx)
+    c = Klass.필드조회_카운트()
+    print(Klass.xx)
     pass
