@@ -1,0 +1,30 @@
+
+🔹 [리스트 컴르리헨션을 이용한 dataframe에 학점 컬럼 추가]
+
+friend_dict_list = [{'name': 'John', 'midterm': 95, 'final': 85},
+         {'name': 'Jenny', 'midterm': 85, 'final': 80},
+         {'name': 'Nate', 'midterm': 10, 'final': 30}]
+df = pd.DataFrame(friend_dict_list, columns = ['name', 'midterm', 'final'])
+df['total'] = df['midterm'] + df['final']
+df['average'] = df['total'] / 2
+
+def hakjeum(average):
+    grade ='F'
+    if average >= 90:
+        grade = 'A'
+    elif average >= 80:
+        grade = 'B'
+    elif average >= 70:
+        grade = 'C'
+    else:
+        grade = 'F'
+    return grade
+
+grade = [hakjeum(average) for average in list(df['average'])]
+df['grade'] = grade
+------------------
+
+	name	midterm	final	total	average	grade
+0	John	95	85	180	90.0	A
+1	Jenny	85	80	165	82.5	B
+2	Nate	10	30	40	20.0	F

@@ -1,0 +1,28 @@
+
+🔹 apply를 사용해서 연월일의 정보에서 연도만 빼보는 예제입니다. #256
+
+date_list = [{'yyyy-mm-dd': '2000-06-27'},
+         {'yyyy-mm-dd': '2002-09-24'},
+         {'yyyy-mm-dd': '2005-12-20'}]
+df = pd.DataFrame(date_list, columns = ['yyyy-mm-dd'])
+df
+
+def extract_YMD(row, idx):
+    if idx  == 0:
+        ret = row.split('-')[0]
+    elif idx == 1:
+        ret = row.split('-')[1]
+    else:
+        ret = row.split('-')[2]
+    return ret
+    
+df['year'] = df['yyyy-mm-dd'].apply(extract_YMD, idx = 0)
+df['month'] = df['yyyy-mm-dd'].apply(extract_YMD, idx = 1)
+df['day'] = df['yyyy-mm-dd'].apply(extract_YMD, idx = 2)
+df
+------------------
+
+	yyyy-mm-dd	year	month	day
+0	2000-06-27	2000	06	27
+1	2002-09-24	2002	09	24
+2	2005-12-20	2005	12	20
