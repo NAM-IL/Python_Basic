@@ -1,9 +1,21 @@
 
 
 [ VS Code 단축키 모음 ](https://webdir.tistory.com/370)
--------------------------------------------------------------------------------------------
-파일 > 기본 설정 > 바로가기 키 에서 현재 활성화된 키보드 단축키를 볼 수 있습니다 .
--------------------------------------------------------------------------------------------
+- 현재영역 접기
+    - Ctrl + Shift + [  : Windows and Linux
+    - ⌥ + ⌘ + [  : Mac
+- 현재영역 펼치기
+    - Ctrl + Shift + ]  : Windows and Linux
+    - ⌥ + ⌘ + ]  : Mac
+- 전체 접기
+    - Ctrl + K + 0(숫자)  : Windows and Linux
+    - ⌘ + K + 0 (숫자) : Mac
+- 전체 펼치기
+    - Ctrl + K + J : Windows and Linux
+    - ⌘ + K + J : Mac
+----
+- [[vscode] 코드 접기 펼치기 단축키](https://benstagram.tistory.com/126)
+### 파일 > 기본 설정 > 바로가기 키 에서 현재 활성화된 키보드 단축키를 볼 수 있습니다 .
 ### 기본 편집
 키	명령	명령 ID
 * ctrl+X	행 삭제 (빈 선택)	editor.action.clipboardCutAction

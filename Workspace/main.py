@@ -8,15 +8,12 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # drawLineChart()
-    # drawDonutChart()
-    # libVersion()
     myPlot = CustomPlot()
-    myPlot.printLibVersion()
-    myPlot.subPlot()
-    # myPlot.drawLineChart()
-    # myPlot.drawBarChart()
-    # myPlot.drawScatterChart()
-    
     # print(myPlot.__verMatploLib)
-    # print(myPlot.verNumpyLib)
+    print(myPlot.verNumpyLib)
+    # myPlot.print_lib_version()
+    # myPlot.draw_line_chart()
+    # myPlot.draw_bar_chart()
+    # myPlot.draw_scatter_chart()
+    # myPlot.test_subplot()
+    myPlot.아이리스_산점도()
