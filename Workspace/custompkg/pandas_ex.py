@@ -1,14 +1,8 @@
-import pandas as pd
+import os
 import csv
+import json
+import pandas as pd
 
-def 파일열기(경로):
-    with open(경로, encoding="utf-8", mode="r") as f:
-        print(f"경로: {경로}")
-        # f.readline()
-        reader = csv.reader(f)
-        for line in reader:
-            print(line)
-            
 class Klass():
     
     def __init__(self):
@@ -29,7 +23,3 @@ class Klass():
             lines = list(csv.reader(csvFile))
             header, values = lines[0], lines[1:]
             return (header, values)
-
-
-if __name__ == "__main__":
-    파일열기(r"./ex5.csv")

@@ -1,6 +1,11 @@
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+import os
+import csv
+import json
+from lxml import objectify
 
 # 예제데이터 넣어주기위해
 from sklearn.datasets import load_iris
@@ -299,3 +304,68 @@ class CustomPlot():
         fig.tight_layout()
 
         return fig
+
+    def load_html(self, url):
+        res_data = pd.read_html(url, header=0, encoding='utf-8')
+        data_length = len(res_data)
+        failures = res_data[0]
+        print(failures.head())
+        return res_data
+
+    def load_xml(self, full_path):
+        xml_data = []
+        
+        with open(full_path) as f:
+            parsed = objectify.parse(f)
+            print(f"root: {parsed.getroot()}")
+            print(f"parsed: {parsed}")
+
+            skip_fields = ["PARENT_SEQ", "INDICATOR_SEQ",
+                        "DESIRED_CHANGE", "DECIMAL_PLACES"]
+
+            for elt in parsed.getroot().INDICATOR:
+                el_data = {}
+                for child in elt.getchildren():
+                    if child.tag in skip_fields:
+                        continue
+                    el_data[child.tag] = child.pyval
+                xml_data.append(el_data)
+
+        # print(f"xml_data: \n {xml_data}")
+        return xml_data
+
+    def 파일열기(self, 경로):
+        # print(f"cwd: {os.getcwd()}")
+        print(f"경로: {경로}")
+        with open(경로, encoding="utf-8", mode="r") as f:
+            # f.readline()
+            reader = csv.reader(f)
+            for line in reader:
+                print(line)
+
+    def dict_comprehension(self, header, *values):
+        # 딕셔너리 컴프리핸션
+        data_dict = {
+            h: v for h, v in zip(header, zip(*values))
+        }
+
+        return data_dict
+
+
+    def deserialize_obj(self, obj):
+        """
+        convert a JSON string to Python form
+
+        Args:
+            obj (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        ret = json.loads(obj)
+        print(f"deserializedObj: \n {ret}")
+        return ret
+
+    def serialize_obj(self, obj):
+        asjson = json.dumps(obj)
+        return asjson
