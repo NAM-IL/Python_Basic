@@ -6,6 +6,13 @@ import os
 import csv
 import json
 from lxml import objectify
+import time
+
+# an elegant and simple HTTP library for Python
+import requests
+
+# HTTP library with thread-safe connection pooling, file post, and more.
+import urllib3
 
 # 예제데이터 넣어주기위해
 from sklearn.datasets import load_iris
@@ -32,6 +39,31 @@ class CustomPlot():
         """
         print(f'matplotlib version : {self.__verMatploLib}')
         print(f'numpy version : {self.__verNumpyLib}')
+
+    def request_web(self, url):
+        """_summary_
+            [6.3 Interacting with Web APIs](https://wesmckinney.com/book/accessing-data#io_web_apis)
+        Args:
+            url (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        try:
+            resp = requests.get(url)
+        except(urllib3.HTTPError):
+            time.sleep(6)
+            resp = requests.get(url)
+
+        resp.raise_for_status()
+        # print(f"status code: {resp.status_code}")
+        # print(f"resp: {resp}")
+        # print(f"_content: {resp._content}")
+
+        data = resp.json()
+        print(f"data: {data}")
+
+        return pd.DataFrame(data)
     
     def draw_line_chart(self):
         """ 

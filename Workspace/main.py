@@ -1,5 +1,6 @@
 import os
 from customPlot import CustomPlot
+from dbtest.sqlite_example import DbHandler
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -25,15 +26,13 @@ if __name__ == "__main__":
     # the `default` and `classic` ones, which will be forced resp. in
     # first and second position.
     # style_list = ['default', 'classic', 'ggplot', 'fivethirtyeight', 'seaborn-whitegrid']
-
-    myPlot.plot_figure(style_label="seaborn-whitegrid")
+    # myPlot.plot_figure(style_label="seaborn-whitegrid")
 
     # Plot a demonstration figure for every available style sheet.
     # for style_label in style_list:
     #     with plt.style.context(style_label):
     #         fig = myPlot.plot_figure(style_label=style_label)
-
-    myPlot.show_chart()
+    # myPlot.show_chart()
 
     test_url = "https://mizykk.tistory.com/39"
     obj_sample = """
@@ -66,3 +65,18 @@ if __name__ == "__main__":
 
     # perf = pd.DataFrame(xml_data)
     # print(f"perf: \n {perf}")
+
+    # [6.3 Interacting with Web APIs](https://wesmckinney.com/book/accessing-data#io_web_apis)
+    # request_url = "https://api.github.com/repos/pandas-dev/pandas/issues"
+    # request_url = "https://jsonplaceholder.typicode.com/posts"
+    # df_data = myPlot.request_web(request_url)
+    # print(f"resp_data: {df_data.head()}")
+
+    # [6.4 Interacting with Databases](https://wesmckinney.com/book/accessing-data#io_databases)
+    db_name = "mydata.sqlite"
+    db_full_path = f"{dir_path}/data/{db_name}"
+    print(f"db_name: {db_name}")
+    print(f"dir_path: {dir_path}")
+    print(f"db_full_path: {db_full_path}")
+    db_handler = DbHandler()
+    db_handler.connect_db(db_full_path)
