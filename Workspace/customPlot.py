@@ -49,6 +49,9 @@ class CustomPlot():
         Returns:
             _type_: _description_
         """
+
+        print("request_web 함수")
+
         try:
             resp = requests.get(url)
         except(urllib3.HTTPError):

@@ -1,6 +1,7 @@
 import os
 from customPlot import CustomPlot
 from dbtest.sqlite_example import DbHandler
+from dbtest.db_ex02 import SqlalchemyKlass
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -80,3 +81,23 @@ if __name__ == "__main__":
     print(f"db_full_path: {db_full_path}")
     db_handler = DbHandler()
     db_handler.connect_db(db_full_path)
+
+    data = [("Atlanta", "Georgia", 1.25, 6),
+            ("Tallahassee", "Florida", 2.6, 3),
+            ("Sacramento", "California", 1.7, 5)]
+
+    stmt = "INSERT INTO test VALUES(?, ?, ?, ?)"
+    # db - Insert
+    # db_handler.insert_db_data(stmt, data)
+
+    # db - Read
+    # df = db_handler.read_db_data()
+    # print(f"df data - 1:\n{df.head()}")
+
+    # SQLAlchemy 사용 예제
+    db_name2 = "mydata.sqlite"
+    db_full_path2 = f"{dir_path}/data/{db_name2}"
+    print(f"db_full_path2:\n{db_full_path2}")
+    db2 = SqlalchemyKlass(dbfullpath=db_full_path2)
+    df = db2.read_db()
+    print(f"df data - 2:\n{df.head()}")
