@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from cctv.seoul import get_data
+from crime.seoul import get_police_sta_data, add_police_sta_addr_col
 
 if __name__ == "__main__":
     dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -52,4 +53,12 @@ if __name__ == "__main__":
     # 그래프에서 마이너스 기호 깨짐 해결
     plt.rcParams['axes.unicode_minus'] = False
             
-    plt.show()
+    # plt.show()
+    
+    # ex-2
+    # 1.
+    dataframe = get_police_sta_data()
+
+    # 2.
+    df_police_sta = add_police_sta_addr_col(dataframe)
+    print(f"\ndf_police_sta:\n{df_police_sta.head()}")
