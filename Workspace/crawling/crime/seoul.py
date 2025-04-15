@@ -7,6 +7,7 @@ from geopy.geocoders import Nominatim
 import folium
 import seaborn as sns
 import matplotlib.pyplot as plt
+import logging
 
 def get_police_sta_data():
     print("get_police_sta_data 함수")
@@ -80,6 +81,20 @@ def get_police_sta_addr(police_sta_name):
     return police_sta_addr
 
 if __name__ =="__main__":
+    # logging 모듈 테스트
+    logging.error("====[에러]====")
+    logging.debug("====[디버그]====")
+    logging.info("====[INFO]====")
+    logging.warning("====[WARNING]====")
+    logging.critical("====[CRITICAL]====")
+
+    mylogger = logging.getLogger("my")
+    mylogger.error("====[에러]====")
+    mylogger.debug("====[디버그]====")
+    mylogger.info("====[INFO]====")
+    mylogger.warning("====[WARNING]====")
+    mylogger.critical("====[CRITICAL]====")
+
     # 1.
     # dataframe = get_police_sta_data()
 
@@ -90,7 +105,7 @@ if __name__ =="__main__":
     # df_police_sta_geocol = add_police_sta_geocode_cols(df_police_sta)
     # print(f"\ndf_police_sta:\n{df_police_sta_geocol.head()}")
 # 
-    map_osm = folium.Map(location=[45.5236, -122.6750])
+    # map_osm = folium.Map(location=[45.5236, -122.6750])
     # map_osm.show_in_browser()
     
     # Apply the default theme
