@@ -13,6 +13,9 @@ def get_headers_as_dict(headers: str) -> dict:
     return dic
 
 if __name__ == "__main__":
+    # Terminal을 clear
+    os.system("clear")
+
     # dir_path = os.path.dirname(os.path.realpath(__file__))
     # target_url = 'https://section.blog.naver.com/Search/Post.nhn?pageNo=1&rangeType=ALL&orderBy=sim&keyword=%ED%8C%8C%EC%9D%B4%EC%8D%AC'
     # params = {
@@ -42,16 +45,19 @@ if __name__ == "__main__":
         referer: https://onoffmix.com/?srsltid=AfmBOoozzSsdfepBrCgGbxsTWeHLHcs2v1mjRnBi9rTRkQ8nDIvLsp4r
         user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Origin and script links for profile and function calls in Performance
     """
-    headers = get_headers_as_dict(headers_text)
     # target_url = 'https://onoffmix.com/event/main?s=%EA%B5%AD%EB%B9%84'
+    headers = get_headers_as_dict(headers_text)
     target_url = 'https://onoffmix.com/event/main'
     params = {
         's' : '국비'
         # 's' : '%EA%B5%AD%EB%B9%84'
     }
     my_crawling = Webscrapingex01(url=target_url, params=params, headers=headers)
-    scraping_data = my_crawling.get_data()
-    print(f"scraping_data:\n {scraping_data}")
-    
-    with open(r'file_google.html', 'w', encoding='utf8') as f:
+    scraping_data = my_crawling.get_page_data()
+    # print(f"scraping_data:\n {scraping_data}")
+
+    with open(r'file_webpage.html', 'w', encoding='utf8') as f:
         f.write(scraping_data)
+
+    df_event = my_crawling.get_dataframe()
+    print(f"df_event: \n{df_event.head()}")
