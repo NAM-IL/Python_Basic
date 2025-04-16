@@ -9,7 +9,11 @@ import sqlite3
 from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 import sqlalchemy as sqla
-class Webscrapingex01():
+
+
+# [Python을 활용하여 Open API 불러오기]
+
+class Crawling():
 
     def __init__(self, url='', params='', headers=''):
         self.url = url
@@ -28,7 +32,7 @@ class Webscrapingex01():
                 
             # for i in tqdm(range(10000)):
             #     print(f"tqdl testing: {i}")
-            page_txt = response.text #resp.json()
+            page_txt = response.json() #.text #resp.json()
             resp_code = response.status_code
             print(f"resp_code: {resp_code}")
 
@@ -131,6 +135,27 @@ if __name__ == "__main__":
     # target_url = "https://www.google.com"
     # target_url = 'https://kin.naver.com/search/list.nhn?query=%ED%8C%8C%EC?%9D%B4%EC%8D%AC'
     # target_url = 'https://wikidocs.net/135659'
+    # headers_text = """
+    #     Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+    #     Accept-Encoding: gzip, deflate, br, zstd
+    #     Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7,id-ID;q=0.6,id;q=0.5
+    #     Cache-Control: max-age=0
+    #     Connection: keep-alive
+    #     Cookie: PHPSESSID=ud0ap9t5dsa24ecnarh119nie18jd3kb; OID=CpYCF2f97COkO9NpJBTiAg==; uid=eU7PhGf97COk++sjBD8NAg==; ch-veil-id=c1ba5371-f414-48f0-a420-19c713639995; ch-session-50540=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXMiLCJrZXkiOiI1MDU0MC02N2ZkZWMyNTIyNzRmNDk0YzgyOSIsImlhdCI6MTc0NDY5NTU1NSwiZXhwIjoxNzQ3Mjg3NTU1fQ.giGYIZKVUm1NePoBiI5iFOoVP_ADrNQSxA2fs3VvrSU
+    #     Pragma: no-cache
+    #     authority: onoffmix.com
+    #     method: GET
+    #     path: /event/main?s=%EA%B5%AD%EB%B9%84
+    #     scheme: https
+    #     priority: u=0, i
+    #     referer: https://onoffmix.com/?srsltid=AfmBOoozzSsdfepBrCgGbxsTWeHLHcs2v1mjRnBi9rTRkQ8nDIvLsp4r
+    #     user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Origin and script links for profile and function calls in Performance
+    # """
+    # target_url = 'https://onoffmix.com/event/main?s=%EA%B5%AD%EB%B9%84'
+    # params = {
+    #     's' : '국비'
+    # }
+    
     headers_text = """
         Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
         Accept-Encoding: gzip, deflate, br, zstd
@@ -144,23 +169,35 @@ if __name__ == "__main__":
         path: /event/main?s=%EA%B5%AD%EB%B9%84
         scheme: https
         priority: u=0, i
-        referer: https://onoffmix.com/?srsltid=AfmBOoozzSsdfepBrCgGbxsTWeHLHcs2v1mjRnBi9rTRkQ8nDIvLsp4r
         user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Origin and script links for profile and function calls in Performance
     """
-    # target_url = 'https://onoffmix.com/event/main?s=%EA%B5%AD%EB%B9%84'
     headers = get_headers_as_dict(headers_text)
-    target_url = 'https://onoffmix.com/event/main'
-    params = {
-        's' : '국비'
-    }
-    my_crawling = Webscrapingex01(url=target_url, params=params, headers=headers)
-    page_data = my_crawling.get_page_data()
-    # print(f"scraping_data:\n {scraping_data}")
+  
+  # [국토교통부_등산로 (XML, JSON)](https://www.data.go.kr/data/15057232/openapi.do)
+    target_url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'
 
-    with open(r'file_webpage.html', 'w', encoding='utf8') as f:
+    key = '{인증키}'
+    params_text = f"""
+        ServiceKey: {key}
+        pageNo: 2
+        numOfRows: 1000
+        dataType: JSON
+        base_date: 20250416
+        base_time: 1200
+        nx: 55
+        ny: 127
+    """
+    
+    params = get_headers_as_dict(params_text)
+    
+    my_crawling = Crawling(url=target_url, params=params, headers=headers)
+    page_data = my_crawling.get_page_data()
+    print(f"scraping_data:\n {page_data}")
+
+    with open(r'file_opapi_webpage.html', 'w', encoding='utf8') as f:
         f.write(page_data)
 
     
-    df_event = my_crawling.get_dataframe()
+    # df_event = my_crawling.get_dataframe()
     # print(f"df_event: \n{df_event.head()}")
-    my_crawling.save_df2db(df_event)
+    # my_crawling.save_df2db(df_event)
