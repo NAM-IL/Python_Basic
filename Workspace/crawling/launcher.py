@@ -1,5 +1,6 @@
 import os
 from webscraping import Webscrapingex01
+from crawlingsel import CrawlingSelen
 
 
 def get_headers_as_dict(headers: str) -> dict:
@@ -46,11 +47,12 @@ if __name__ == "__main__":
         user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Origin and script links for profile and function calls in Performance
     """
     # target_url = 'https://onoffmix.com/event/main?s=%EA%B5%AD%EB%B9%84'
+    
+    # 1. 4월 15일(화)
     headers = get_headers_as_dict(headers_text)
     target_url = 'https://onoffmix.com/event/main'
     params = {
         's' : '국비'
-        # 's' : '%EA%B5%AD%EB%B9%84'
     }
     my_crawling = Webscrapingex01(url=target_url, params=params, headers=headers)
     scraping_data = my_crawling.get_page_data()
@@ -61,3 +63,14 @@ if __name__ == "__main__":
 
     df_event = my_crawling.get_dataframe()
     print(f"df_event: \n{df_event.head()}")
+    
+    # 2. 4월 16일(수)
+    url = 'https://onoffmix.com/event/main?s=국비'
+    mySelenCrawling = CrawlingSelen(target_url=url)
+    # mySelenCrawling.delay(3)
+    mySelenCrawling.move_start_page()
+    found_element = mySelenCrawling.find_element_by_xpath(by_xpath='//*[@id="content"]/div/section[2]/ul/li[1]/article[1]/a/div[2]')
+    # mySelenCrawling.click_sel_element(sel_element)
+    print(f"type:\n {type(found_element)}")
+    print(f"found_element:\n {found_element}")
+    mySelenCrawling.click_sel_element(found_element)
