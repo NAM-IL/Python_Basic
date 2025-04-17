@@ -93,6 +93,12 @@ class CrawlingSelen():
     def quit(self):
         self.driver.close()
 
+    def move_tap(self):
+        pass
+
+    def close_tap(self):
+        pass
+
 if __name__ == "__main__":
     # Terminal을 clear
     os.system("clear")
