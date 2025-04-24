@@ -233,6 +233,8 @@ class CoffeeMachine:
               """)
 
 
+# [ex0424_coffee_machine_new.py](https://github.com/NAM-IL/Python_Basic/blob/main/code/ex0424_coffee_machine_new.py)
+
 if __name__ == "__main__":
     # Terminal을 clear
     os.system("clear")
