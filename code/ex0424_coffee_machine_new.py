@@ -1,4 +1,3 @@
-
 import os
 import platform
 import psutil
@@ -165,9 +164,9 @@ class CoffeeMachineNew(Exception):
         
         if(money_received < drink_cost):
             if (money_received > 0):
-                print(f"죄송합니다. 금액이 부족합니다. 돈이 환불되었습니다.")
+                print("죄송합니다. 금액이 부족합니다. 돈이 환불되었습니다.")
             else:
-                print(f"죄송합니다. 금액이 부족합니다.")
+                print("죄송합니다. 금액이 부족합니다.")
         elif(money_received > drink_cost):
             print(f"거스름돈 ${round(money_received - drink_cost, 3):.2f}를 돌려드립니다.")
             is_tr_success = True

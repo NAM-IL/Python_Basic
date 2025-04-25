@@ -1,6 +1,6 @@
-
 import os
-
+import platform
+import psutil
 class CoffeeMachine:
     def __init__(self):
         self.ordered_menu_name = ""
@@ -236,8 +236,19 @@ class CoffeeMachine:
 # [ex0424_coffee_machine_new.py](https://github.com/NAM-IL/Python_Basic/blob/main/code/ex0424_coffee_machine_new.py)
 
 if __name__ == "__main__":
-    # Terminal을 clear
-    os.system("clear")
+    # Terminal을 clear(macOS, Linux) 또는 cls(Windows) 명령어로 초기화
+    # os.name: posix (macOS, Linux), nt (Windows)
+    # [How to identify which OS Python is running on](https://stackoverflow.com/questions/1854/how-to-identify-which-os-python-is-running-on)
+    if(psutil.WINDOWS):
+        os.system("cls")
+    else:
+        os.system("clear")
+    
+    print(f"os.name: {os.name}")
+    print(f"psutil: {psutil.WINDOWS}")
+    print(f"system: {platform.system()}")
+    print(f"platform: {platform.platform()}")
+
     my_coffee_machine = CoffeeMachine()
     
     my_coffee_machine.order_command = input("어떤 음료를 원하시나요? (에스프레소/라떼/카푸치노) >>>")
